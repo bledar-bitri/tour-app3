@@ -1,4 +1,38 @@
-<p *ngIf="message">
-  {{message.processId}}: {{message.text}}
-</p>
-<app-tour [tour]="calculatedTour"></app-tour>
+<!-- progress bar -->
+   <div class="container">
+     <div fxLayout="row wrap" class="colored box nopad" >
+
+
+       <div fxFlex>
+         <p *ngIf="message"> {{message.processId}}: {{message.text}} </p>
+       </div>
+
+       <div fxFlex="grow">
+          <md-progress-bar color='primary' mode='determined' [value]="progressPercent"> </md-progress-bar>
+       </div>
+
+     </div>
+   </div>
+
+   <div fxFlex>
+     <app-tour [tour]="calculatedTour"></app-tour>
+   </div>
+
+
+   <!--   ------------------------
+
+   <div class="containerX">
+     <div fxLayout="row wrap" class="colored box nopad" >
+       <div fxFlex="none">     [flex="none"]       </div>
+       <div fxFlex>            [flex]              </div>
+       <div fxFlex="nogrow">   [flex="nogrow"]     </div>
+       <div fxFlex="grow">     [flex="grow"]       </div>
+
+       <div fxFlex="33.33%">   [flex="33.33%"]     </div>
+       <div fxFlex="33.33%">   [flex="33.33%"]     </div>
+       <div fxFlex="33.33%">   [flex="33.33%"]     </div>
+
+     </div>
+   </div>
+
+-->

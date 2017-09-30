@@ -9,7 +9,7 @@ import {City} from '../../classes/city';
 export class CityComponent implements OnInit {
 
   @Input()
-  city: City;
+  public city: City;
   constructor() { }
 
   ngOnInit() {

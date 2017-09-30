@@ -1,0 +1,10 @@
+<div class="container">
+      <h1>Angular 2 Google Map Direction Display</h1>
+      <div class="form-group">
+        <input placeholder="Enter source location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [formControl]="destinationInput">
+        <input placeholder="Enter destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupOutput [formControl]="destinationOutput" >
+      </div>
+       <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" [styles]="mapCustomStyles">
+          <sebm-google-map-directions [origin]="origin" [destination]="destination" [waypoints]="waypoints"></sebm-google-map-directions>
+       </agm-map>
+    </div>

@@ -3,8 +3,8 @@ import { RouteGenerationProgressService } from '../../services/route-generation-
 import { Observable } from 'rxjs/Rx';
 import { Subscription } from 'rxjs';
 import {ProgressMessage} from '../../classes/progress-message';
-import {City} from "../../classes/city";
-import {TourService} from "../../services/tour.service";
+import {City} from '../../classes/city';
+import {TourService} from '../../services/tour.service';
 
 
 
@@ -20,8 +20,11 @@ export class RouteGenerationProgressComponent implements OnInit {
   subscription: Subscription;
   calculatedTour: City[];
 
+  progressPercent = 0;
+
   constructor(private progressService: RouteGenerationProgressService,
-              private _tourService: TourService) { }
+              private _tourService: TourService) {
+  }
 
   ngOnInit() {
     const timer = Observable.timer(2000, 1000);
@@ -36,6 +39,7 @@ export class RouteGenerationProgressComponent implements OnInit {
   updateProgress(receivedMessage: ProgressMessage) {
     if (receivedMessage != null && receivedMessage.text !== '') {
       this.message = receivedMessage;
+      this.progressPercent = this.message.progressPercent;
       if (this.message.isDone) {
         this.getTour();
       }

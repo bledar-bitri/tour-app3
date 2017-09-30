@@ -1,6 +1,4 @@
-export class ProgressMessage {
-  processId: number;
-  text: string;
-  isError: boolean;
-  isDone: boolean;
+import {LogMessage} from './log-message';
+export class ProgressMessage extends LogMessage {
+  progressPercent: number;
 }

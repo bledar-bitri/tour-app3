@@ -2,12 +2,16 @@
 
 
 <md-tab-group>
+
+  <md-tab label="Map">
+    <app-gmap-moving-marker></app-gmap-moving-marker>
+  </md-tab>
+
+
   <md-tab label="Tour">
     <app-route-generation-progress></app-route-generation-progress>
   </md-tab>
-  <md-tab label="Map">
 
-  </md-tab>
   <md-tab label="Settings">
 
   </md-tab>
@@ -17,4 +21,3 @@
 <div class='container'>
   <router-outlet></router-outlet>
 </div>
-

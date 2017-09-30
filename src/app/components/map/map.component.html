@@ -1,7 +1,17 @@
 <div class="container">
   <h1>Angular 2 Google Map Direction Display</h1>
-  <agm-map [latitude]="lat" [longitude]="lng">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  </agm-map>
+  <div class="form-group">
+    <input placeholder="Enter source location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupInput [formControl]="destinationInput">
+    <input placeholder="Enter destination" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #pickupOutput [formControl]="destinationOutput" >
+  </div>
+  <sebm-google-map >
+
+    <!-- <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude" [iconUrl]="iconurl">
+        <sebm-google-map-info-window>
+            <strong>InfoWindow content</strong>
+        </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+    <sebm-google-map-directions [origin]="origin" [destination]="destination"></sebm-google-map-directions>-->
+  </sebm-google-map>
 </div>
 

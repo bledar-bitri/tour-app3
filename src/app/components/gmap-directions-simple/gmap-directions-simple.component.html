@@ -1,0 +1,15 @@
+<div class="container">
+      <div class="form-group">
+      </div>
+       <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [styles]="mapCustomStyles">
+
+          <appMapDirections
+            [origin]="origin"
+            [destination]="destination"
+            [waypoints]="waypoints">
+
+          </appMapDirections>
+
+       </agm-map>
+    </div>
+

@@ -20,7 +20,7 @@ export class BmapComponent implements OnInit {
 
   ngAfterViewInitx() {
 
-    if(typeof Microsoft !== 'undefined' && typeof Microsoft.Maps !== 'undefined' && typeof Microsoft.Maps.Map !== 'undefined' ) {
+    if (typeof Microsoft !== 'undefined' && typeof Microsoft.Maps !== 'undefined' && typeof Microsoft.Maps.Map !== 'undefined' ) {
       const map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
           credentials: 'AiisyBTVtvji2DY-4CR23hWfe_EMoVMW_CX1U_cfT4Q_GCEmT7LBz8Cxm9qi2T6F'
         }
@@ -33,9 +33,8 @@ export class BmapComponent implements OnInit {
   }
 
   GetMap() {
-  if (typeof Microsoft !== undefined && typeof Microsoft.Maps !== undefined &&
-    Microsoft.Maps.Map !== null) {
-    //Map API available add your map load code.
+  if (typeof Microsoft !== undefined && typeof Microsoft.Maps !== undefined &&  Microsoft.Maps.Map !== null) {
+    // Map API available add your map load code.
     this.document.ready(function() {
       const map = new Microsoft.Maps.Map(this.myMap.nativeElement, {
           credentials: 'AiisyBTVtvji2DY-4CR23hWfe_EMoVMW_CX1U_cfT4Q_GCEmT7LBz8Cxm9qi2T6F'

@@ -1,0 +1,17 @@
+agm-map {
+    width: 500px;
+    height: 500px;
+}
+
+sebm-google-map {
+    border: 1px dashed darkred;
+    width: 500px;
+    height: 300px;
+    display: inline-block;
+}
+
+sebm-google-map-directions  {
+    width: 400px;
+    height: 400px;
+}
+
