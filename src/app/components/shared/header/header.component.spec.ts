@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { MdMenuModule } from '@angular/material';
 import { HeaderComponent } from './header.component';
+import { ClockComponent } from '../../clock/clock.component'
+
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -11,7 +13,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ],
+      declarations: [ HeaderComponent, ClockComponent ],
       imports: [MdMenuModule]
     })
     .compileComponents();

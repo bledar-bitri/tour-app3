@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import {CITIES} from '../data/cities';
 import { City } from '../classes/city';
-import {Http, Response } from '@angular/http';
+import {HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Rx';
@@ -10,15 +10,14 @@ import {Observable} from 'rxjs/Rx';
 @Injectable()
 export class TourService {
 
-  private url = 'http://localhost:55944/api/RouteQueue';
+  private url = 'api/RouteQueue';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
 
 
   getTour(): Observable<City[]> {
     return this._http
-      .get(this.url)
-      .map((res: Response) => res.json())
+      .get<City[]>(this.url)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 

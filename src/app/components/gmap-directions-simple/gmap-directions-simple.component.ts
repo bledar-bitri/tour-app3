@@ -73,7 +73,7 @@ export class GmapDirectionsSimpleComponent implements OnInit {
 
          const timer = Observable.timer(2000, 10000);
          timer.subscribe(t => {
-              this.vc.updateDirections();
+              this.vc.updateDirections(null, null);
 
               this.waypoints = [];
               if (alternativeStopover) {

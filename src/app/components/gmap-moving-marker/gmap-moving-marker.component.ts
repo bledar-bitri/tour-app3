@@ -1,7 +1,7 @@
 import { Component  } from '@angular/core';
 
 
-declare var google:any;
+declare var google: any;
 
 @Component({
   selector: 'app-gmap-moving-marker',
@@ -17,7 +17,7 @@ export class GmapMovingMarkerComponent {
 
 
   private setCurrentPosition() {
-      if ("geolocation" in navigator) {
+      if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition((position) => {
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;

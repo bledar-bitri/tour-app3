@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import { RouteGenerationProgressService } from '../../services/route-generation-progress.service';
-import { Observable } from 'rxjs/Rx';
-import { Subscription } from 'rxjs';
 import {ProgressMessage} from '../../classes/progress-message';
 import {City} from '../../classes/city';
 import {TourService} from '../../services/tour.service';
+import {SignalRService} from '../../services/signal-r.service';
 
 
 
@@ -14,26 +13,19 @@ import {TourService} from '../../services/tour.service';
   styleUrls: ['./route-generation-progress.component.css'],
   providers: [RouteGenerationProgressService, TourService]
 })
-export class RouteGenerationProgressComponent implements OnInit {
+export class RouteGenerationProgressComponent {
 
   message: ProgressMessage;
-  subscription: Subscription;
   calculatedTour: City[];
-
   progressPercent = 0;
 
-  constructor(private progressService: RouteGenerationProgressService,
-              private _tourService: TourService) {
-  }
+  constructor(
+              private _signalRService: SignalRService,
+              private _tourService: TourService,
+              private _ngZone: NgZone) {
 
-  ngOnInit() {
-    const timer = Observable.timer(2000, 1000);
-    this.subscription = timer.subscribe( t => {
-      this.getProgress();
-    });
-  }
-  getProgress() {
-    this.progressService.getProgress().subscribe(data => this.updateProgress(data));
+    // this can subscribe for events
+    this.subscribeToEvents();
   }
 
   updateProgress(receivedMessage: ProgressMessage) {
@@ -47,10 +39,33 @@ export class RouteGenerationProgressComponent implements OnInit {
   }
 
   getTour() {
-    this._tourService.getTour().subscribe(data => this.calculatedTour = data);
+    this._tourService.getTour().subscribe(data => {
+
+      data.forEach(city => {
+        console.log(city.name);
+      });
+
+      this.calculatedTour = data;
+    });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  private subscribeToEvents(): void {
+    // if connection exists it can call of method.
+    this._signalRService.connectionEstablished.subscribe(() => {
+      console.log('Connected to signal r');
+    });
+
+    this._signalRService.progressReceived.subscribe((message: ProgressMessage) => {
+      this._ngZone.run(() => {
+
+        console.log('progress message: ' + JSON.stringify(message));
+        console.log('message.text: ' + message.text);
+
+        const pm: ProgressMessage = new ProgressMessage();
+        pm.assign(message);
+        this.updateProgress(pm);
+        console.log('progressMessages text: ' + pm.text);
+      });
+    });
   }
 }

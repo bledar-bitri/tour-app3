@@ -10,7 +10,7 @@ export class GmapNormalComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
     let timer = Observable.timer(2000, 1000);
     timer.subscribe(t=> {
         this.lat = this.lat + 0.0001;

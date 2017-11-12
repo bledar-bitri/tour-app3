@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GmapNormalComponent } from './gmap-normal.component';
+import { AgmCoreModule } from '@agm/core';
+import {environment} from '../../../environments/environment';
 
 describe('GmapNormalComponent', () => {
   let component: GmapNormalComponent;
@@ -8,7 +10,12 @@ describe('GmapNormalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GmapNormalComponent ]
+      declarations: [ GmapNormalComponent ],
+      imports: [
+        AgmCoreModule.forRoot({
+          apiKey: environment.googleApiKey,
+          libraries: environment.googleLibraries
+      })]
     })
     .compileComponents();
   }));

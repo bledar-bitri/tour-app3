@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GmapMovingMarkerComponent } from './gmap-moving-marker.component';
+import { AgmCoreModule } from '@agm/core';
+import {MockGoogleMapsAPIWrapper} from '../../mocks/mock-google-maps-api-wrapper';
+import {MovingMarkerDirective} from '../../directives/moving-marker.directive';
+import {environment} from '../../../environments/environment';
 
 describe('GmapMovingMarkerComponent', () => {
   let component: GmapMovingMarkerComponent;
@@ -8,7 +12,14 @@ describe('GmapMovingMarkerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GmapMovingMarkerComponent ]
+      declarations: [ GmapMovingMarkerComponent, MovingMarkerDirective ],
+      imports: [
+        AgmCoreModule.forRoot({
+          apiKey: environment.googleApiKey,
+          libraries: environment.googleLibraries
+        })
+      ],
+      providers: [MockGoogleMapsAPIWrapper],
     })
     .compileComponents();
   }));

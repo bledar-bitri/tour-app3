@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { TourService } from './tour.service';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('TourService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TourService]
+      providers: [TourService, HttpClient, HttpHandler]
     });
   });
 

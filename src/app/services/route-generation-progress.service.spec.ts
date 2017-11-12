@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { RouteGenerationProgressService } from './route-generation-progress.service';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('RouteGenerationProgressService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [RouteGenerationProgressService]
+      providers: [RouteGenerationProgressService, HttpClient, HttpHandler]
     });
   });
 

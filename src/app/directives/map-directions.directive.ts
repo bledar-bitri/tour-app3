@@ -25,6 +25,7 @@ export class MapDirectionsDirective {
     console.log('loading google maps ' + this.origin);
 
     const me = this;
+    me.gmapsApi.getNativeMap();
 /*
     this.gmapsApi.getNativeMap().then(map => {
 
@@ -58,42 +59,50 @@ export class MapDirectionsDirective {
     });*/
   }
 
-  public updateDirections() {
+  public updateDirections(origin: string, destination: string) {
+
+    if (origin == null || destination == null) {
+      console.log('map-directions.directive.ts: either origin or destination is null');
+    }
 
     console.log('updating directions from: ' + this.origin + ' to ' + this.destination);
     const me = this;
+    me.origin = origin;
+    me.destination = destination;
+
 
     this.gmapsApi.getNativeMap().then(map => {
 
-              if (!this.origin || !this.destination ) {
-                return;
-              }
-              if (me.directionsService == null) {
-                me.directionsService = new google.maps.DirectionsService;
-              }
-              if (me.directionsDisplay == null) {
-                me.directionsDisplay = new google.maps.DirectionsRenderer({
-                  suppressMarkers: true
-                });
-                me.directionsDisplay.setMap(map);
-              }
+        google.maps.event.trigger(map, 'resize'); // issue resize command to display the map if the div was hidden
 
-              me.directionsService.route({
-                      origin: this.origin,
-                      destination: this.destination,
-                      waypoints: this.waypoints,
-                      optimizeWaypoints: false,
-                      travelMode: 'DRIVING'
-                    }, function(response, status) {
-                                if (status === 'OK') {
-                                  // me.directionsDisplay.setOptions({ preserveViewport: true });
-                                  me.directionsDisplay.setDirections(response);
-                                  me.showSteps(map, response );
-                                } else {
-                                  window.alert('Directions request failed due to ' + status);
-                                }
-              });
+        if (!this.origin || !this.destination ) {
+          return;
+        }
+        if (me.directionsService == null) {
+          me.directionsService = new google.maps.DirectionsService;
+        }
+        if (me.directionsDisplay == null) {
+          me.directionsDisplay = new google.maps.DirectionsRenderer({
+            suppressMarkers: true
+          });
+          me.directionsDisplay.setMap(map);
+        }
 
+        me.directionsService.route({
+                origin: this.origin,
+                destination: me.destination,
+                waypoints: me.waypoints,
+                optimizeWaypoints: false,
+                travelMode: 'DRIVING'
+              }, function(response, status) {
+                          if (status === 'OK') {
+                            // me.directionsDisplay.setOptions({ preserveViewport: true });
+                            me.directionsDisplay.setDirections(response);
+                            me.showSteps(map, response );
+                          } else {
+                            window.alert('Directions request failed due to ' + status);
+                          }
+        });
     });
   }
 
